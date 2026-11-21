@@ -6,6 +6,13 @@ Vale's alerts in Neovim are underlines. The Hemingway Editor colors the text
 itself, which makes problems easier to spot while reading a draft. Vimingway
 adds those colors on top of the underlines.
 
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/screenshot-light.png">
+  <img alt="A Markdown draft in Neovim with Vimingway's yellow, red, purple, blue and green highlights" src="assets/screenshot-dark.png">
+</picture>
+
+The text in the screenshot is [`assets/demo.md`](assets/demo.md).
+
 | Color | Meaning | Vale rules |
 |-------|---------|------------|
 | Yellow | Hard-to-read sentence | `Vimingway.HardSentence` (over 25 words) |
