@@ -1,0 +1,87 @@
+*vimingway.txt*  Hemingway-style highlights for Vale
+
+==============================================================================
+CONTENTS                                                  *vimingway-contents*
+
+  1. Introduction ..................... |vimingway-intro|
+  2. Commands ......................... |vimingway-commands|
+  3. Lua API .......................... |vimingway-api|
+  4. Options .......................... |vimingway-options|
+  5. Highlights ....................... |vimingway-highlights|
+
+==============================================================================
+1. INTRODUCTION                                              *vimingway-intro*
+
+Vimingway colors the text that Vale flags, the way the Hemingway Editor does.
+It reads diagnostics from vale-ls or nvim-lint's `vale` linter and draws a
+background color over each one whose rule it knows.
+
+  Yellow   hard-to-read sentence      Vimingway.HardSentence
+  Red      very hard sentence         Vimingway.VeryHardSentence
+  Purple   simpler phrase exists      write-good.TooWordy, write-good.ThereIs,
+                                      proselint.Needless, Voices.ColonReveal,
+                                      Voices.ThroatClearing
+  Blue     adverbs and weakeners      write-good.Weasel, proselint.Very
+  Green    passive voice              write-good.Passive
+
+The two sentence rules come from the `Vimingway` Vale package in this repo.
+See the README for the `.vale.ini` setup.
+
+==============================================================================
+2. COMMANDS                                               *vimingway-commands*
+
+                                                                  *:Vimingway*
+:Vimingway [on|off|toggle]
+    Turn the highlights on, off, or toggle them. With no argument, toggles.
+
+==============================================================================
+3. LUA API                                                     *vimingway-api*
+
+require("vimingway").setup({opts})                         *vimingway.setup()*
+    Set options. Optional: the first command or API call runs it with the
+    defaults if you haven't.
+
+require("vimingway").toggle()                             *vimingway.toggle()*
+require("vimingway").enable()                             *vimingway.enable()*
+require("vimingway").disable()                           *vimingway.disable()*
+require("vimingway").is_enabled()                     *vimingway.is_enabled()*
+
+==============================================================================
+4. OPTIONS                                                 *vimingway-options*
+
+enabled ~
+    Start with the highlights on. Default: `false`
+
+notify ~
+    Show a message when toggling. Default: `true`
+
+sources ~
+    Diagnostic sources to read. Default: `{ "vale-ls", "vale" }`
+
+rules ~
+    Vale rule name to kind. Kinds are `hard`, `very_hard`, `complex`,
+    `adverb` and `passive`. Your table merges into the defaults; set a rule
+    to `false` to drop it. >lua
+        rules = { ["MyStyle.LongSentence"] = "hard", ["proselint.Very"] = false }
+<
+palette ~
+    Background colors keyed by 'background' (`light`, `dark`), then by
+    kind. Set to `false` to leave the highlight groups to your color scheme.
+
+abbreviations ~
+    Lowercase words ending in a period that don't end a sentence.
+    Default: `{ "e.g.", "i.e.", "vs.", "cf.", "mr.", "mrs.", "ms.", "dr." }`
+
+==============================================================================
+5. HIGHLIGHTS                                           *vimingway-highlights*
+
+  VimingwayHard        *hl-VimingwayHard*
+  VimingwayVeryHard    *hl-VimingwayVeryHard*
+  VimingwayComplex     *hl-VimingwayComplex*
+  VimingwayAdverb      *hl-VimingwayAdverb*
+  VimingwayPassive     *hl-VimingwayPassive*
+
+Word highlights sit above sentence highlights where they overlap, and
+VimingwayVeryHard sits above VimingwayHard.
+
+ vim:tw=78:ts=8:ft=help:norl:

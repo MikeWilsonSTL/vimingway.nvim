@@ -1,0 +1,6 @@
+extends: occurrence
+message: "Long sentence (more than 25 words). Consider splitting it."
+level: suggestion
+scope: sentence
+max: 25
+token: \b(\w+)\b
