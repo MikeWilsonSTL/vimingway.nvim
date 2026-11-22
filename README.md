@@ -176,6 +176,15 @@ slightly high.
 nvim --headless -u NONE -l tests/run.lua
 ```
 
+The repo's `.vale.ini` lints its Markdown, including `assets/demo.md`. To set
+it up, sync the packages and link in the local style so edits to
+`vale/Vimingway` take effect right away:
+
+```sh
+vale sync
+ln -s ../../vale/Vimingway .vale/styles/Vimingway
+```
+
 Pushing a `v*` tag builds `Vimingway.zip` and attaches it to a GitHub
 release.
 
